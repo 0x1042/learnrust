@@ -16,3 +16,7 @@ clap = { version = "4.0", features = ["derive"] }
 tokio = { version = "1.21", features = ["full"] }
 bytes = { version = "1", features = ["serde"] }
 tokio-util = { version = "0.7", features = ["full"] }
+codec = { path = "../codec" }
+futures = "0.3"
+futures-util = "0.3"
+tokio-stream = "0.1"

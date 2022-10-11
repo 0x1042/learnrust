@@ -1,8 +1,11 @@
 mod exception;
 
+use std::{
+    io::{Error, ErrorKind},
+    time,
+};
+
 use exception::RpcError;
-use std::io::{Error, ErrorKind};
-use std::time;
 
 fn mock_rpc_error(dummy: u16) -> Result<(), RpcError> {
     if dummy < 10 {
