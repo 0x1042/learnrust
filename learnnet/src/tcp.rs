@@ -35,12 +35,19 @@ pub fn start(addr_str: &str) -> anyhow::Result<()> {
 
 #[cfg(test)]
 mod test {
-    use std::io::Write;
+    use std::{io::Write, net::SocketAddr, thread};
 
-    use crate::*;
+    use socket2::{Domain, Protocol, Socket, Type};
+
+    use super::start;
 
     #[test]
     fn test_client() {
+        if std::env::var("RUST_LOG").is_err() {
+            std::env::set_var("RUST_LOG", "debug")
+        }
+        tracing_subscriber::fmt::init();
+        thread::spawn(|| start("127.0.0.1:10085").unwrap());
         let mut socket = Socket::new(Domain::IPV4, Type::STREAM, Some(Protocol::TCP)).unwrap();
         let addr = "127.0.0.1:10085".parse::<SocketAddr>().unwrap();
         socket.set_nodelay(true).unwrap();
@@ -48,7 +55,7 @@ mod test {
 
         socket.connect(&addr.into()).unwrap();
 
-        for _i in 0..2000 {
+        for _i in 0..100 {
             let _ = socket.write("hello world".as_bytes()).unwrap();
         }
     }

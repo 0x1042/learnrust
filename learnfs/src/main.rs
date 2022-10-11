@@ -1,10 +1,11 @@
-#[allow(dead_code)]
-use anyhow::anyhow;
-use std::fs;
-use std::fs::File;
-use std::io::{BufRead, BufReader, ErrorKind, Read, Seek, SeekFrom, Write};
-use std::path::Path;
+use std::{
+    fs,
+    fs::File,
+    io::{BufRead, BufReader, ErrorKind, Read, Seek, SeekFrom, Write},
+    path::Path,
+};
 
+use anyhow::anyhow;
 use clap::Parser;
 
 /// Simple program to greet a person

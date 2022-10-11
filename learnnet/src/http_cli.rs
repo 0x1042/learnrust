@@ -1,6 +1,6 @@
-use std::collections::HashMap;
-use std::time;
+use std::{collections::HashMap, time};
 
+use bytes::Bytes;
 use tracing::debug;
 
 lazy_static::lazy_static! {
@@ -45,7 +45,7 @@ pub async fn get_resp_json(url: &str) -> anyhow::Result<usize> {
     Ok(json.len())
 }
 
-pub async fn get_origin_body(url: &str) -> anyhow::Result<()> {
+pub async fn get_origin_body(url: &str) -> anyhow::Result<Bytes> {
     let body = CLIENT.get(url).send().await?;
     let addr = body.remote_addr();
     debug!("addr :{:?}", addr);
@@ -56,6 +56,30 @@ pub async fn get_origin_body(url: &str) -> anyhow::Result<()> {
 
     let bb = body.bytes().await?;
 
-    // debug!("body:{:?}", bb);
-    Ok(())
+    Ok(bb)
+}
+
+#[cfg(test)]
+mod test {
+
+    use crate::http_cli::*;
+
+    #[tokio::test]
+    async fn test_http_cli() {
+        match get("https://www.toutiao.com").await {
+            Ok(info) => {
+                println!("resp:{}", info);
+            }
+            Err(err) => {
+                println!("err:{}", err);
+            }
+        };
+
+        match get_origin_body("https://www.taobao.com").await {
+            Ok(_) => {}
+            Err(err) => {
+                println!("err {:?}", err);
+            }
+        }
+    }
 }
