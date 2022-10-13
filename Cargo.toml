@@ -1,5 +1,12 @@
 [workspace]
-members = ["learnerror", "learnlog", "learnfs", "learnnet", "codec"]
+members = [
+    "learnerror",
+    "learnlog",
+    "learnfs",
+    "learnnet",
+    "learngeneric",
+    "codec",
+]
 
 resolver = "2"
 
