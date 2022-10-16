@@ -6,6 +6,7 @@ members = [
     "learnnet",
     "learngeneric",
     "codec",
+    "learnaxum",
 ]
 
 resolver = "2"
