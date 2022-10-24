@@ -5,6 +5,7 @@ pub mod opts;
 pub mod rcache;
 pub mod routers;
 pub mod state;
+pub mod user_service;
 
 use clap::Parser;
 use opts::AppEnv;

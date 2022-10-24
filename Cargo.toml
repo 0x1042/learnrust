@@ -6,6 +6,7 @@ members = [
     "learnnet",
     "learngeneric",
     "codec",
+    "serialization",
     "learnaxum",
 ]
 

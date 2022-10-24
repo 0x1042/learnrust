@@ -1,0 +1,6 @@
+CREATE TABLE user_info (
+  id INTEGER NOT NULL PRIMARY KEY,
+  user_name VARCHAR NOT NULL,
+  user_email VARCHAR NOT NULL,
+  invalid BOOLEAN NOT NULL DEFAULT 'f'
+)
