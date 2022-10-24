@@ -1,6 +1,9 @@
 use std::net::SocketAddr;
 
-use axum::{routing::get, Router};
+use axum::{
+    routing::{get, post},
+    Router,
+};
 use tokio::signal::{self};
 use tower::ServiceBuilder;
 use tracing::warn;
@@ -10,6 +13,7 @@ use crate::{
     rcache::create_redis_cli,
     routers::{index, user_info},
     state::AppState,
+    user_service::{create, del, detail, list},
 };
 
 #[allow(clippy::expect_used)]
@@ -48,10 +52,11 @@ pub async fn run(env: &AppEnv) {
 
     let app = Router::new()
         .route("/", get(index))
-        .route("/user_info", get(user_info))
+        .route("/user", post(create).get(list))
+        .route("/user/:id", get(detail).put(del))
         .layer(ServiceBuilder::new().layer(axum::Extension(appstate)));
 
-    let addr = &env.addr.parse::<SocketAddr>().unwrap();
+    let addr = env.addr.parse::<SocketAddr>().unwrap();
 
     tracing::info!("listening on {}", addr);
 

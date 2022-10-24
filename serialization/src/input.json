@@ -1,0 +1,15 @@
+{
+    "id": 1,
+    "title": "总经理金晶科技大",
+    "creatives": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "bid": 98989000000,
+    "cpa_bid": 198989000000,
+    "landing_url": "https://www.google.com",
+    "bid_type": "cpa"
+}
